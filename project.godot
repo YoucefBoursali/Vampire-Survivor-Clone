@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
-SceneManager="*res://addons/scene_manager/autoload/scene_manager.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/goutte.animated_shape_2d/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/goutte.animated_shape_2d/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
