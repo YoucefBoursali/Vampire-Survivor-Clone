@@ -33,5 +33,7 @@ drag_vertical_enabled = true
 editor_draw_limits = true
 script = ExtResource("3_4gq07")
 
-[node name="Skeleton" parent="." instance=ExtResource("4_dd6qh")]
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Skeleton" parent="Enemies" instance=ExtResource("4_dd6qh")]
 position = Vector2(688, -648)
