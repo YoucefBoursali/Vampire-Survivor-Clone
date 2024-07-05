@@ -1,9 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvcvrkesonpah"]
+[gd_scene load_steps=6 format=3 uid="uid://bvcvrkesonpah"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_e5h72"]
+[ext_resource type="Texture2D" uid="uid://bemktxy5u48xi" path="res://Assets/Textures/dirt_full_new.png" id="2_cw34p"]
+[ext_resource type="PackedScene" uid="uid://u0nm451oh0qh" path="res://Scenes/player.tscn" id="2_m4ldv"]
+[ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_4gq07"]
+[ext_resource type="PackedScene" uid="uid://b6mag0gclpcf" path="res://Scenes/skeleton.tscn" id="4_dd6qh"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_e5h72")
 
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
+[node name="DirtFullNew" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(737.001, 16.4998)
+scale = Vector2(2.657, 1.84475)
+texture = ExtResource("2_cw34p")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+
+[node name="Player" parent="." instance=ExtResource("2_m4ldv")]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+limit_left = -4500
+limit_top = -3700
+limit_right = 6000
+limit_bottom = 3700
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
+script = ExtResource("3_4gq07")
+
+[node name="Skeleton" parent="." instance=ExtResource("4_dd6qh")]
+position = Vector2(688, -648)

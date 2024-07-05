@@ -1,0 +1,178 @@
+[gd_scene load_steps=15 format=3 uid="uid://b6mag0gclpcf"]
+
+[ext_resource type="Script" path="res://Scripts/Skeleton.gd" id="1_xwp4n"]
+[ext_resource type="Texture2D" uid="uid://cjrtc40o6io60" path="res://Assets/Enemies/Skeleton/Death.png" id="2_6ob6q"]
+[ext_resource type="Texture2D" uid="uid://dsl6jf21ogk0m" path="res://Assets/Enemies/Skeleton/Walk.png" id="2_32t4p"]
+[ext_resource type="PackedScene" uid="uid://dyv4xbrmmcvvf" path="res://Scenes/health_component.tscn" id="3_sf2dn"]
+[ext_resource type="PackedScene" uid="uid://3tmycroc4sxu" path="res://Scenes/hitbox_component.tscn" id="4_1khwo"]
+[ext_resource type="Texture2D" uid="uid://bw7v8l4qdhbuw" path="res://Assets/Enemies/Skeleton/Take Hit.png" id="4_rj5bv"]
+[ext_resource type="AudioStream" uid="uid://cypi6f4meca5" path="res://Assets/Audio/SoundEffect/enemy_death.ogg" id="7_7wg57"]
+[ext_resource type="AudioStream" uid="uid://cwekbi6wd2tyq" path="res://Assets/Audio/SoundEffect/enemy_hit.ogg" id="8_mqwab"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufyli"]
+size = Vector2(20, 6)
+
+[sub_resource type="Animation" id="Animation_lko5j"]
+resource_name = "walk"
+length = 0.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_32t4p")]
+}
+
+[sub_resource type="Animation" id="Animation_n4kq8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vb7n3"]
+resource_name = "death"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_6ob6q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Death:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cf0le"]
+resource_name = "hit"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_rj5bv")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds/Hit:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k233o"]
+_data = {
+"RESET": SubResource("Animation_n4kq8"),
+"death": SubResource("Animation_vb7n3"),
+"hit": SubResource("Animation_cf0le"),
+"walk": SubResource("Animation_lko5j")
+}
+
+[node name="Skeleton" type="CharacterBody2D" groups=["Enemy"]]
+motion_mode = 1
+platform_floor_layers = 4294967040
+script = ExtResource("1_xwp4n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_rj5bv")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 23)
+shape = SubResource("RectangleShape2D_ufyli")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_k233o")
+}
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox_component") instance=ExtResource("3_sf2dn")]
+hitbox_component = NodePath("../HitboxComponent")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_1khwo")]
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_7wg57")
+bus = &"SFX"
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("8_mqwab")
