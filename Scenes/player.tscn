@@ -1,7 +1,8 @@
-[gd_scene load_steps=87 format=3 uid="uid://u0nm451oh0qh"]
+[gd_scene load_steps=88 format=3 uid="uid://u0nm451oh0qh"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_06tcq"]
 [ext_resource type="Texture2D" uid="uid://e2v1tn836qh3" path="res://Assets/Character/Necromancer_creativekind-Sheet.png" id="2_v480l"]
+[ext_resource type="Script" path="res://Scripts/Weapon.gd" id="3_53scs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmtjy"]
 atlas = ExtResource("2_v480l")
@@ -786,3 +787,15 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0.5, 27)
 shape = SubResource("RectangleShape2D_2x50m")
+
+[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("3_53scs")
+player = NodePath("..")
+
+[node name="Marker2D" type="Marker2D" parent="Weapon"]
+position = Vector2(18, 11)
+
+[node name="Timer" type="Timer" parent="Weapon"]
+wait_time = 0.5
+
+[connection signal="timeout" from="Weapon/Timer" to="Weapon" method="_on_timer_timeout"]

@@ -1,12 +1,11 @@
 extends CharacterBody2D
-
+class_name Player
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
 @export var speed := 200.0
 var direction: Vector2
-
+var aim_position: Vector2 = Vector2(1,0)
 func _ready() -> void:
 	pass
 
@@ -24,3 +23,5 @@ func _physics_process(delta:float) -> void:
 	elif velocity > Vector2.ZERO:
 		animated_sprite.flip_h = false
 	move_and_slide()
+
+

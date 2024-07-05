@@ -8,7 +8,8 @@ signal health_depleted
 var health := max_health
 
 func _ready() -> void:
-	hitbox_component.damaged.connect(on_damaged)
+	if hitbox_component:
+		hitbox_component.damaged.connect(on_damaged)
 	
 func on_damaged(attack: Attack) -> void:
 	animation_player.play("hit")

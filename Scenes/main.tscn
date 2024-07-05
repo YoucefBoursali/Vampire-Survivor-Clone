@@ -36,4 +36,6 @@ script = ExtResource("3_4gq07")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Skeleton" parent="Enemies" instance=ExtResource("4_dd6qh")]
-position = Vector2(688, -648)
+position = Vector2(800, -618)
+
+[node name="Fireball" type="Node" parent="."]
