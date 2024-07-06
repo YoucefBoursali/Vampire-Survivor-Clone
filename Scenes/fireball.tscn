@@ -92,7 +92,9 @@ collision_mask = 2
 script = ExtResource("1_f2qff")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.97507, 0, 0.191377, 1)
 sprite_frames = SubResource("SpriteFrames_33k1x")
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

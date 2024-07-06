@@ -180,10 +180,11 @@ libraries = {
 "": SubResource("AnimationLibrary_k233o")
 }
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player", "hitbox_component", "skeleton") instance=ExtResource("3_sf2dn")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("skeleton", "animation_player", "hitbox_component") instance=ExtResource("3_sf2dn")]
+skeleton = NodePath("..")
 animation_player = NodePath("../AnimationPlayer")
 hitbox_component = NodePath("../HitboxComponent")
-skeleton = NodePath("..")
+max_health = 20.0
 
 [node name="HitboxComponent" parent="." instance=ExtResource("4_1khwo")]
 

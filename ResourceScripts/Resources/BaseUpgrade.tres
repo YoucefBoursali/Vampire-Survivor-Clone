@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="BaseUpgrade" load_steps=2 format=3 uid="uid://bpnjblv4ofs2y"]
+[gd_resource type="Resource" script_class="BaseUpgrades" load_steps=3 format=3 uid="uid://bpnjblv4ofs2y"]
 
 [ext_resource type="Script" path="res://ResourceScripts/BaseUpgrade.gd" id="1_oc55g"]
+[ext_resource type="Texture2D" uid="uid://k7eueww8mdtg" path="res://Assets/Textures/Items/Upgrades/thick_new.png" id="2_his10"]
 
 [resource]
 script = ExtResource("1_oc55g")
+sprite_2d = ExtResource("2_his10")

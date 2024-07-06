@@ -4,11 +4,12 @@ class_name HealthComponent
 
 signal health_changed(value: float, max_value: float)
 
+@export var skeleton: Skeleton
 @export var animation_player: AnimationPlayer
 @export var hitbox_component: HitboxComponent
+
 @export var max_health := 10.0
-@export var skeleton: Skeleton
-var health := max_health
+@onready var health := max_health
 
 func _ready() -> void:
 	if hitbox_component:

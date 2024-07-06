@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DamageUpgrade" load_steps=3 format=3 uid="uid://ccjmvr430uyfw"]
+
+[ext_resource type="Script" path="res://ResourceScripts/damage.gd" id="1_mhbtg"]
+[ext_resource type="Texture2D" uid="uid://c8gopbqc35oh" path="res://Assets/Textures/Items/Upgrades/helmet_1.png" id="2_jy60a"]
+
+[resource]
+script = ExtResource("1_mhbtg")
+damage_increase = 5.0
+texture = ExtResource("2_jy60a")

@@ -1,6 +1,6 @@
+@tool
 extends Area2D
-class_name Upgrade
-@onready var sprite: Sprite2D = $Sprite2D
+@export var sprite: Sprite2D
 @export var base_upgrade: BaseUpgrades:
 	set(val):
 		base_upgrade = val
@@ -21,5 +21,6 @@ func _process(delta: float) -> void:
 			needs_update = false
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
-	body.upgrade.append(base_upgrade)
-	queue_free()
+	if body is Player:
+		body.upgrade.append(base_upgrade)
+		queue_free()

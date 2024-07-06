@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd82kl1v03y6y"]
+[gd_scene load_steps=5 format=3 uid="uid://bd82kl1v03y6y"]
 
 [ext_resource type="Script" path="res://Scripts/upgrade.gd" id="1_it161"]
-[ext_resource type="Resource" uid="uid://ou1p7phtwh0x" path="res://ResourceScripts/Resources/speed2.tres" id="2_gc8d2"]
+[ext_resource type="Resource" uid="uid://bpnjblv4ofs2y" path="res://ResourceScripts/Resources/BaseUpgrade.tres" id="2_3xxcv"]
+[ext_resource type="Texture2D" uid="uid://c8gopbqc35oh" path="res://Assets/Textures/Items/Upgrades/helmet_1.png" id="3_rscsh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjaj4"]
-radius = 3.16228
+radius = 14.0357
 
-[node name="Upgrade" type="Area2D"]
+[node name="Upgrade" type="Area2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_it161")
-base_upgrade = ExtResource("2_gc8d2")
+sprite = NodePath("Sprite2D")
+base_upgrade = ExtResource("2_3xxcv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_rscsh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fjaj4")
