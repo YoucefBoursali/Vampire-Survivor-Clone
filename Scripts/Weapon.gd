@@ -16,6 +16,9 @@ func _physics_process(delta: float) -> void:
 		new_fireball.rotation = direction.angle()
 		get_tree().root.add_child(new_fireball)
 		to_attack= false
+
+		for upgrades in player.upgrade:
+			upgrades.apply_upgrade(new_fireball)
 	
 
 

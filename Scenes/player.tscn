@@ -765,6 +765,7 @@ _data = {
 size = Vector2(21, 46)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 2
 motion_mode = 1
 platform_floor_layers = 4294967040
 script = ExtResource("1_06tcq")

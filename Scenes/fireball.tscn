@@ -93,7 +93,6 @@ script = ExtResource("1_f2qff")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_33k1x")
-frame_progress = 0.703335
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -103,7 +102,7 @@ libraries = {
 [node name="Hurtbox" type="Area2D" parent="." groups=["Hurtbox"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(11, -1)
+position = Vector2(12, -1)
 shape = SubResource("CircleShape2D_3udyw")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hitbox_area_entered"]

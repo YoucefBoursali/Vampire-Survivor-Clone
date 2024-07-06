@@ -1,6 +1,6 @@
 extends CharacterBody2D
 class_name Player
-
+@export var upgrade: Array[BaseUpgrades] = []
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var speed := 200.0

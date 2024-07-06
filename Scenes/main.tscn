@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvcvrkesonpah"]
+[gd_scene load_steps=7 format=3 uid="uid://bvcvrkesonpah"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_e5h72"]
 [ext_resource type="Texture2D" uid="uid://bemktxy5u48xi" path="res://Assets/Textures/dirt_full_new.png" id="2_cw34p"]
 [ext_resource type="PackedScene" uid="uid://u0nm451oh0qh" path="res://Scenes/player.tscn" id="2_m4ldv"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_4gq07"]
 [ext_resource type="PackedScene" uid="uid://b6mag0gclpcf" path="res://Scenes/skeleton.tscn" id="4_dd6qh"]
+[ext_resource type="PackedScene" uid="uid://bd82kl1v03y6y" path="res://Scenes/upgrade.tscn" id="6_6gon6"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_e5h72")
@@ -16,6 +17,8 @@ scale = Vector2(2.657, 1.84475)
 texture = ExtResource("2_cw34p")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
+
+[node name="Upgrade" parent="." instance=ExtResource("6_6gon6")]
 
 [node name="Player" parent="." instance=ExtResource("2_m4ldv")]
 

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpeedUpgrade" load_steps=3 format=3 uid="uid://gi0nu01xtu1w"]
+
+[ext_resource type="Script" path="res://ResourceScripts/speed.gd" id="1_2ptcq"]
+[ext_resource type="Texture2D" uid="uid://dt8u4qyficb7d" path="res://Assets/Textures/Items/Upgrades/urand_mage.png" id="2_lgbor"]
+
+[resource]
+script = ExtResource("1_2ptcq")
+speed = 100.0
+sprite = ExtResource("2_lgbor")
