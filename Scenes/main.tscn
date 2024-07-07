@@ -1,13 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvcvrkesonpah"]
+[gd_scene load_steps=10 format=3 uid="uid://bvcvrkesonpah"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_e5h72"]
 [ext_resource type="Texture2D" uid="uid://bemktxy5u48xi" path="res://Assets/Textures/dirt_full_new.png" id="2_cw34p"]
 [ext_resource type="PackedScene" uid="uid://u0nm451oh0qh" path="res://Scenes/player.tscn" id="2_m4ldv"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_4gq07"]
-[ext_resource type="PackedScene" uid="uid://b6mag0gclpcf" path="res://Scenes/skeleton.tscn" id="4_dd6qh"]
 [ext_resource type="Resource" uid="uid://ou1p7phtwh0x" path="res://ResourceScripts/Resources/speed2.tres" id="4_oubbi"]
 [ext_resource type="Resource" uid="uid://ccjmvr430uyfw" path="res://ResourceScripts/Resources/damage.tres" id="5_gn5gq"]
+[ext_resource type="Resource" uid="uid://b1lsq1qjr1xjb" path="res://ResourceScripts/Resources/pierce.tres" id="6_5bl5j"]
 [ext_resource type="PackedScene" uid="uid://bd82kl1v03y6y" path="res://Scenes/upgrade.tscn" id="6_6gon6"]
+
+[sub_resource type="Curve2D" id="Curve2D_abxpf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 5528.96, -2599.27, 0, 0, 0, 0, 5582.59, 3378.68, 0, 0, 0, 0, 1556.17, 3400.29, 0, 0, 0, 0, 1186.45, 3374.89, 0, 0, 0, 0, -2806.95, 3402.97, 0, 0, 0, 0, -2770.83, 126.468, 0, 0, 0, 0, -2748.94, -2619.79, 0, 0, 0, 0, -2748.94, -2619.79)
+}
+point_count = 8
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_e5h72")
@@ -20,24 +26,40 @@ texture = ExtResource("2_cw34p")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 
+[node name="Enemies" type="Node" parent="."]
+
 [node name="Upgrades" type="Node" parent="."]
 
 [node name="Upgrade" parent="Upgrades" instance=ExtResource("6_6gon6")]
-position = Vector2(33, 26)
+position = Vector2(-106, 81)
 base_upgrade = ExtResource("5_gn5gq")
 
 [node name="Upgrade2" parent="Upgrades" instance=ExtResource("6_6gon6")]
+position = Vector2(-78, -72)
 base_upgrade = ExtResource("4_oubbi")
 
+[node name="Upgrade3" parent="Upgrades" instance=ExtResource("6_6gon6")]
+position = Vector2(124, -50)
+base_upgrade = ExtResource("6_5bl5j")
+
 [node name="Player" parent="." instance=ExtResource("2_m4ldv")]
-position = Vector2(145, 68)
+position = Vector2(20, 44)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-458.528, -108.935)
+scale = Vector2(0.364621, 0.271802)
+curve = SubResource("Curve2D_abxpf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+position = Vector2(5528.96, -2599.27)
+rotation = 1.56183
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(145, 68)
-zoom = Vector2(0.5, 0.5)
+position = Vector2(20, 44)
+zoom = Vector2(0.25, 0.25)
 limit_left = -4500
 limit_top = -3700
 limit_right = 6000
@@ -47,9 +69,8 @@ drag_vertical_enabled = true
 editor_draw_limits = true
 script = ExtResource("3_4gq07")
 
-[node name="Enemies" type="Node" parent="."]
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
 
-[node name="Skeleton" parent="Enemies" instance=ExtResource("4_dd6qh")]
-position = Vector2(708, -569)
-
-[node name="Fireball" type="Node" parent="."]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

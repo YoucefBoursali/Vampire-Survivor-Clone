@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PierceUpgrade" load_steps=3 format=3 uid="uid://b1lsq1qjr1xjb"]
+
+[ext_resource type="Script" path="res://ResourceScripts/Pierce.gd" id="1_6n3sh"]
+[ext_resource type="Texture2D" uid="uid://beeq8otbrbso0" path="res://Assets/Textures/Items/Upgrades/chunk.png" id="2_7y6ka"]
+
+[resource]
+script = ExtResource("1_6n3sh")
+max_pierce = 1
+texture = ExtResource("2_7y6ka")

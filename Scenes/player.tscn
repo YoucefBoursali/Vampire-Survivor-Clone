@@ -1,8 +1,10 @@
-[gd_scene load_steps=88 format=3 uid="uid://u0nm451oh0qh"]
+[gd_scene load_steps=90 format=3 uid="uid://u0nm451oh0qh"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_06tcq"]
+[ext_resource type="Script" path="res://Scripts/Player_Health.gd" id="2_iv6u0"]
 [ext_resource type="Texture2D" uid="uid://e2v1tn836qh3" path="res://Assets/Character/Necromancer_creativekind-Sheet.png" id="2_v480l"]
 [ext_resource type="Script" path="res://Scripts/Weapon.gd" id="3_53scs"]
+[ext_resource type="AudioStream" uid="uid://b1hoo8yej3shc" path="res://Assets/Audio/SoundEffect/Lose.ogg" id="5_nvet0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmtjy"]
 atlas = ExtResource("2_v480l")
@@ -547,14 +549,37 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqr6u"]
-size = Vector2(20, 10)
+size = Vector2(14, 9)
 
 [sub_resource type="Animation" id="Animation_exlkw"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_bxv78"]
-length = 0.8
-loop_mode = 1
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -578,6 +603,56 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["death"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hurtbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/Gameover:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_bvn3q"]
@@ -666,7 +741,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_6oal8"]
 length = 1.3
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -762,7 +836,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2x50m"]
-size = Vector2(21, 46)
+size = Vector2(12, 35)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 2
@@ -770,23 +844,31 @@ motion_mode = 1
 platform_floor_layers = 4294967040
 script = ExtResource("1_06tcq")
 
+[node name="Player_Health" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_iv6u0")
+player = NodePath("..")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_voqwy")
-animation = &"Idle"
+animation = &"walk"
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 43)
+position = Vector2(0, 43.5)
 shape = SubResource("RectangleShape2D_aqr6u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_1pg05")
 }
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0.5, 27)
+position = Vector2(0, 32.5)
 shape = SubResource("RectangleShape2D_2x50m")
 
 [node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("player")]
@@ -796,7 +878,17 @@ player = NodePath("..")
 [node name="Marker2D" type="Marker2D" parent="Weapon"]
 position = Vector2(18, 11)
 
-[node name="Timer" type="Timer" parent="Weapon"]
+[node name="FiringCooldown" type="Timer" parent="Weapon"]
 wait_time = 0.5
 
-[connection signal="timeout" from="Weapon/Timer" to="Weapon" method="_on_timer_timeout"]
+[node name="FireEnd" type="Timer" parent="Weapon"]
+wait_time = 6.0
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Gameover" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_nvet0")
+bus = &"SFX"
+
+[connection signal="area_entered" from="Hurtbox" to="Player_Health" method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="Weapon/FiringCooldown" to="Weapon" method="_on_timer_timeout"]

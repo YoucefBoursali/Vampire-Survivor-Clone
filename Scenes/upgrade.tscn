@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/upgrade.gd" id="1_it161"]
 [ext_resource type="Resource" uid="uid://bpnjblv4ofs2y" path="res://ResourceScripts/Resources/BaseUpgrade.tres" id="2_3xxcv"]
-[ext_resource type="Texture2D" uid="uid://c8gopbqc35oh" path="res://Assets/Textures/Items/Upgrades/helmet_1.png" id="3_rscsh"]
+[ext_resource type="Texture2D" uid="uid://c3cjjrrctvjqo" path="res://Assets/Textures/Items/Upgrades/scroll_old.png" id="3_qenvs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjaj4"]
 radius = 14.0357
@@ -14,7 +14,7 @@ base_upgrade = ExtResource("2_3xxcv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_rscsh")
+texture = ExtResource("3_qenvs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fjaj4")

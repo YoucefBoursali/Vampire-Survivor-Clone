@@ -7,7 +7,8 @@ var to_attack: bool = true
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot") and to_attack:
-		$Timer.start()
+		$FiringCooldown.start()
+		$FireEnd.start()
 		if sign(player.aim_position.x) != sign(marker.position.x):
 			marker.position.x *= -1
 		var direction := get_global_mouse_position() - marker.global_position
@@ -19,8 +20,8 @@ func _physics_process(delta: float) -> void:
 
 		for upgrades in player.upgrade:
 			upgrades.apply_upgrade(new_fireball)
-	
-
 
 func _on_timer_timeout() -> void:
 	to_attack = true
+
+

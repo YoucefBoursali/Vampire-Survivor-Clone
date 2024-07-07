@@ -3,7 +3,7 @@ extends Node2D
 class_name HealthComponent
 
 signal health_changed(value: float, max_value: float)
-
+signal health_depleted
 @export var skeleton: Skeleton
 @export var animation_player: AnimationPlayer
 @export var hitbox_component: HitboxComponent
@@ -25,6 +25,7 @@ func on_damaged(attack: Attack) -> void:
 	if health <= 0:
 		skeleton.Is_dead = true
 		health = 0
+		health_depleted.emit()
 		if animation_player:
 			animation_player.play("death")
 	print(health)
