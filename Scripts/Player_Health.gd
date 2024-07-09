@@ -8,8 +8,12 @@ var health := max_health
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area is Hurtbox:
+		player.Is_hit = true
 		animation_player.play("hit")
+		await animation_player.animation_finished
+		player.Is_hit = false
 		health = clamp(health, 0, max_health)
+		print(health)
 		var hurtbox: Hurtbox = area
 		health -= hurtbox.damage
 		if health <= 0:

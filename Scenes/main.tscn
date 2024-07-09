@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvcvrkesonpah"]
+[gd_scene load_steps=12 format=3 uid="uid://bvcvrkesonpah"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_e5h72"]
 [ext_resource type="Texture2D" uid="uid://bemktxy5u48xi" path="res://Assets/Textures/dirt_full_new.png" id="2_cw34p"]
 [ext_resource type="PackedScene" uid="uid://u0nm451oh0qh" path="res://Scenes/player.tscn" id="2_m4ldv"]
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="3_4gq07"]
+[ext_resource type="PackedScene" uid="uid://b6mag0gclpcf" path="res://Scenes/skeleton.tscn" id="3_6qxsh"]
+[ext_resource type="PackedScene" uid="uid://d3r21vxtatr77" path="res://Scenes/eye.tscn" id="3_n8mh3"]
 [ext_resource type="Resource" uid="uid://ou1p7phtwh0x" path="res://ResourceScripts/Resources/speed2.tres" id="4_oubbi"]
 [ext_resource type="Resource" uid="uid://ccjmvr430uyfw" path="res://ResourceScripts/Resources/damage.tres" id="5_gn5gq"]
 [ext_resource type="Resource" uid="uid://b1lsq1qjr1xjb" path="res://ResourceScripts/Resources/pierce.tres" id="6_5bl5j"]
@@ -17,6 +19,7 @@ point_count = 8
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_e5h72")
+array_of_mobs = Array[Resource]([ExtResource("3_n8mh3"), ExtResource("3_6qxsh")])
 
 [node name="DirtFullNew" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -43,7 +46,7 @@ position = Vector2(124, -50)
 base_upgrade = ExtResource("6_5bl5j")
 
 [node name="Player" parent="." instance=ExtResource("2_m4ldv")]
-position = Vector2(20, 44)
+position = Vector2(51, 48)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -58,7 +61,7 @@ position = Vector2(5528.96, -2599.27)
 rotation = 1.56183
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(20, 44)
+position = Vector2(51, 48)
 zoom = Vector2(0.25, 0.25)
 limit_left = -4500
 limit_top = -3700

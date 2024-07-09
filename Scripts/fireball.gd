@@ -5,7 +5,7 @@ class_name FireBall
 @onready var player : CharacterBody2D = get_tree().get_first_node_in_group("Player")
 var direction: Vector2
 @export var speed := 300.0
-@export var damage: = 3.0
+@export var damage: = randi_range(1.0, 8.0)
 @export var max_pierce := 1
 var pierces := 0
 func _physics_process(delta: float) -> void:
@@ -24,3 +24,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		pierces += 1
 		if pierces >= max_pierce:
 			queue_free()
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

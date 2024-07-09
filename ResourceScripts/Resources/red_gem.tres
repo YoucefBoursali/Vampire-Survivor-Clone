@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Gems" load_steps=3 format=3 uid="uid://bqga5knj7cjtf"]
+
+[ext_resource type="Script" path="res://ResourceScripts/gems.gd" id="1_emn8l"]
+[ext_resource type="Texture2D" uid="uid://bp33lr6rbgnfd" path="res://Assets/Textures/Items/Gems/Gem_red.png" id="2_0112y"]
+
+[resource]
+script = ExtResource("1_emn8l")
+score = 50
+texture = ExtResource("2_0112y")

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="PlayerSpeedUpgrade" load_steps=3 format=3 uid="uid://ctp8oh382fmmq"]
-
-[ext_resource type="Script" path="res://ResourceScripts/playerSpeed.gd" id="1_t44re"]
-[ext_resource type="Texture2D" uid="uid://crnvo67c2ngyq" path="res://Assets/Textures/Items/Upgrades/low_boots.png" id="2_7coch"]
-
-[resource]
-script = ExtResource("1_t44re")
-speed_increase = 200.0
-texture = ExtResource("2_7coch")

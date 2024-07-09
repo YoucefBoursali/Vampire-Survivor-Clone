@@ -1,3 +1,4 @@
 extends Node
 
-signal score
+signal Score_added(score: int)
+

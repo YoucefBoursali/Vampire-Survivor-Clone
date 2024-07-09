@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Skeleton
+class_name Eye
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("Player")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
@@ -7,7 +7,10 @@ class_name Skeleton
 var direction: Vector2
 var Is_dead: bool = false
 var Is_hit: bool = false
-var gems: PackedScene = preload("res://Scenes/gem.tscn")
+var gems: PackedScene= preload("res://Scenes/gem.tscn")
+func _ready() -> void:
+	pass
+	
 func _physics_process(delta: float) -> void:
 	if Is_dead: return
 	if Is_hit: return
