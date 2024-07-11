@@ -353,6 +353,8 @@ shape = SubResource("CircleShape2D_xciff")
 
 [node name="hit" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("7_nuaao")
+bus = &"SFX"
 
 [node name="death" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_2kue7")
+bus = &"SFX"

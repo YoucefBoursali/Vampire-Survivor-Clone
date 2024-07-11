@@ -1,7 +1,6 @@
 extends Area2D
 
 @onready var collect: AudioStreamPlayer2D = $Collect
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var gem_resource: Gems
 @onready var sprite: Sprite2D = $Sprite2D
 var score: int:
@@ -16,4 +15,11 @@ func _ready() -> void:
 func _on_body_entered(body: PhysicsBody2D) -> void:
 	if body is Player:
 		score += gem_resource.score
-		animation_player.play("Collected")
+		visible = false
+		collect.play()
+		$CollisionShape2D.set_deferred("disabled", true)
+		
+
+
+func _on_collect_finished() -> void:
+	queue_free()

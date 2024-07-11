@@ -21,6 +21,8 @@ func _physics_process(delta: float) -> void:
 
 			for upgrades in player.upgrade:
 				upgrades.apply_upgrade(new_fireball)
+			for tornado in player.upgrade:
+				tornado.apply_upgrade_to_player(player)
 
 func _on_timer_timeout() -> void:
 	to_attack = true

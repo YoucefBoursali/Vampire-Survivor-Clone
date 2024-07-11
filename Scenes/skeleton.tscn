@@ -300,3 +300,4 @@ bus = &"SFX"
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_mqwab")
+bus = &"SFX"

@@ -1,7 +1,12 @@
 extends Node2D
+class_name  Main
 @export var array_of_mobs : Array[Resource] =[]
 @onready var path_follow: PathFollow2D = $Player/Path2D/PathFollow2D
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
+func _ready() -> void:
+	SignalBus.Score_added.connect(canvas_layer.on_score_changed)
+	
 
 func spawn() -> void:
 	var mobs:PackedScene = array_of_mobs.pick_random()

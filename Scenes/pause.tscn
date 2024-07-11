@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce8q03mqxyxv0"]
+
+[ext_resource type="Script" path="res://Scripts/Pause.gd" id="1_5n6lf"]
+[ext_resource type="Shader" path="res://Scripts/pause.gdshader" id="2_vfbk8"]
+[ext_resource type="FontFile" uid="uid://blb1mcdpplffp" path="res://Assets/Font/tenderness.otf" id="2_wllv2"]
+[ext_resource type="PackedScene" uid="uid://bh1vqslnefb53" path="res://Scenes/blur_effect.tscn" id="4_msnnb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rq2s2"]
+shader = ExtResource("2_vfbk8")
+shader_parameter/lod = 0.0
+
+[node name="Pause" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5n6lf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_rq2s2")
+layout_mode = 0
+offset_left = -573.0
+offset_top = -327.0
+offset_right = 578.0
+offset_bottom = 324.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+modulate = Color(1, 1, 1, 0.027451)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -41.5
+offset_right = 75.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wllv2")
+text = "Resume"
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wllv2")
+text = "Restart
+"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wllv2")
+text = "Quit
+"
+
+[node name="AnimationPlayer" parent="." instance=ExtResource("4_msnnb")]
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

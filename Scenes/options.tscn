@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2wbv4vcmqqrq"]
+
+[ext_resource type="Script" path="res://Scripts/Options.gd" id="1_s5r6o"]
+[ext_resource type="FontFile" uid="uid://blb1mcdpplffp" path="res://Assets/Font/tenderness.otf" id="2_k3vv1"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s5r6o")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -42.0
+offset_right = 100.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Music" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Music"]
+layout_mode = 0
+offset_left = -38.0
+offset_top = -2.0
+offset_right = 8.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("2_k3vv1")
+text = "Music
+"
+
+[node name="SFX" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/SFX"]
+layout_mode = 0
+offset_left = -28.0
+offset_right = 12.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_k3vv1")
+text = "SFX
+"
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k3vv1")
+theme_override_font_sizes/font_size = 35
+text = "Back
+"
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Music" to="." method="_on_music_value_changed"]
+[connection signal="changed" from="MarginContainer/VBoxContainer/SFX" to="." method="_on_sfx_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

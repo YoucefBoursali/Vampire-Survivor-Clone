@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://h6xpexev70pn"]
+
+[ext_resource type="Script" path="res://ResourceScripts/Tornado.gd" id="1_co6in"]
+[ext_resource type="Texture2D" uid="uid://dfhmdska874bo" path="res://Assets/Textures/Items/Weapons/tornado.png" id="1_qwv85"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnldi"]
+radius = 13.0384
+
+[node name="Tornado" type="CharacterBody2D"]
+position = Vector2(215, 71)
+script = ExtResource("1_co6in")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qwv85")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_pnldi")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

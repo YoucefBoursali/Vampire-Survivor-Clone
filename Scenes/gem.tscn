@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ykiyewlolecy"]
+[gd_scene load_steps=6 format=3 uid="uid://ykiyewlolecy"]
 
 [ext_resource type="Script" path="res://Scripts/gem.gd" id="1_62yfg"]
 [ext_resource type="Texture2D" uid="uid://cirb4rif86ib" path="res://Assets/Textures/Items/Gems/Gem_blue.png" id="1_oswao"]
@@ -6,66 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://dmctuggh73fd6" path="res://Assets/Audio/SoundEffect/collectgem.mp3" id="3_86g84"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ymvy"]
-
-[sub_resource type="Animation" id="Animation_c56el"]
-resource_name = "Collected"
-length = 0.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_oswao")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Collect:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2m70y"]
-_data = {
-"Collected": SubResource("Animation_c56el")
-}
 
 [node name="Gem" type="Area2D"]
 script = ExtResource("1_62yfg")
@@ -82,9 +22,5 @@ texture = ExtResource("1_oswao")
 stream = ExtResource("3_86g84")
 bus = &"SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_2m70y")
-}
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="Collect" to="." method="_on_collect_finished"]

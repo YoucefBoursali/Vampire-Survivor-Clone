@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvcvrkesonpah"]
+[gd_scene load_steps=14 format=3 uid="uid://bvcvrkesonpah"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_e5h72"]
 [ext_resource type="Texture2D" uid="uid://bemktxy5u48xi" path="res://Assets/Textures/dirt_full_new.png" id="2_cw34p"]
@@ -10,6 +10,8 @@
 [ext_resource type="Resource" uid="uid://ccjmvr430uyfw" path="res://ResourceScripts/Resources/damage.tres" id="5_gn5gq"]
 [ext_resource type="Resource" uid="uid://b1lsq1qjr1xjb" path="res://ResourceScripts/Resources/pierce.tres" id="6_5bl5j"]
 [ext_resource type="PackedScene" uid="uid://bd82kl1v03y6y" path="res://Scenes/upgrade.tscn" id="6_6gon6"]
+[ext_resource type="Script" path="res://Scripts/CanvasLayer.gd" id="11_80bw1"]
+[ext_resource type="PackedScene" uid="uid://ce8q03mqxyxv0" path="res://Scenes/pause.tscn" id="12_wtcj5"]
 
 [sub_resource type="Curve2D" id="Curve2D_abxpf"]
 _data = {
@@ -75,5 +77,17 @@ script = ExtResource("3_4gq07")
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("11_80bw1")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_right = 401.0
+offset_bottom = 27.0
+show_percentage = false
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Pause" parent="CanvasLayer2" instance=ExtResource("12_wtcj5")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
