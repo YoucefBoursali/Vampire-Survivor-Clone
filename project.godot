@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 SignalBus="*res://Scripts/SignalBus.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-SceneManager="*res://addons/scene_manager/autoload/scene_manager.gd"
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 Music="*res://Scenes/music.tscn"
 Click="*res://Scenes/click.tscn"
 
