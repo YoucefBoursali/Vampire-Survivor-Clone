@@ -21,8 +21,9 @@ SignalBus="*res://Scripts/SignalBus.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
-Music="*res://Scenes/music.tscn"
-Click="*res://Scenes/click.tscn"
+Persistence="*res://Scripts/Persistence.gd"
+AudioMusicManager="*res://Scripts/AudioMusicManager.gd"
+AudioSfxManager="*res://Scripts/AudioSFXManager.gd"
 
 [debug]
 

@@ -6,8 +6,7 @@ class_name  Main
 
 func _ready() -> void:
 	SignalBus.Score_added.connect(canvas_layer.on_score_changed)
-	
-
+	AudioMusicManager.play("res://Assets/Audio/Music/battleThemeA.mp3")
 func spawn() -> void:
 	var mobs:PackedScene = array_of_mobs.pick_random()
 	var new_mobs := mobs.instantiate()

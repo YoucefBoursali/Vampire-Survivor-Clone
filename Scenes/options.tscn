@@ -1,75 +1,276 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2wbv4vcmqqrq"]
+[gd_scene load_steps=6 format=3 uid="uid://c2wbv4vcmqqrq"]
 
-[ext_resource type="Script" path="res://Scripts/Options.gd" id="1_s5r6o"]
-[ext_resource type="FontFile" uid="uid://blb1mcdpplffp" path="res://Assets/Font/tenderness.otf" id="2_k3vv1"]
+[ext_resource type="FontFile" uid="uid://blb1mcdpplffp" path="res://Assets/Font/tenderness.otf" id="1_hvr10"]
+[ext_resource type="Script" path="res://Scripts/Video.gd" id="1_sa8nq"]
+[ext_resource type="Script" path="res://Scripts/Audio.gd" id="2_2uafy"]
+[ext_resource type="PackedScene" uid="uid://bvbhik5a77ewh" path="res://Scenes/action_button.tscn" id="3_r22wm"]
+[ext_resource type="Script" path="res://Scripts/Back.gd" id="5_58myf"]
 
-[node name="Options" type="Control"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="Options" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_s5r6o")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Video" type="TabBar" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hvr10")
+script = ExtResource("1_sa8nq")
+
+[node name="Settings" type="HBoxContainer" parent="Video"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -42.0
-offset_right = 100.0
-offset_bottom = 42.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Labels" type="VBoxContainer" parent="Video/Settings"]
 layout_mode = 2
 
-[node name="Music" type="HSlider" parent="MarginContainer/VBoxContainer"]
+[node name="Fullscreen" type="Label" parent="Video/Settings/Labels"]
 layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "Fullscreen
+"
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Music"]
-layout_mode = 0
-offset_left = -38.0
-offset_top = -2.0
-offset_right = 8.0
-offset_bottom = 21.0
-theme_override_fonts/font = ExtResource("2_k3vv1")
+[node name="Borderless" type="Label" parent="Video/Settings/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "Borderless
+"
+
+[node name="Vsync" type="Label" parent="Video/Settings/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "Vsync
+"
+
+[node name="Checkbox" type="VBoxContainer" parent="Video/Settings"]
+layout_mode = 2
+
+[node name="Fullscreen" type="CheckBox" parent="Video/Settings/Checkbox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Borderless" type="CheckBox" parent="Video/Settings/Checkbox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Vsync" type="OptionButton" parent="Video/Settings/Checkbox"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Enabled"
+popup/item_0/id = 0
+popup/item_1/text = "Disabled"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptive"
+popup/item_2/id = 2
+popup/item_3/text = "Mailbox"
+popup/item_3/id = 3
+
+[node name="Back2" type="Button" parent="Video"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -46.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_hvr10")
+theme_override_font_sizes/font_size = 30
+text = "Back
+"
+script = ExtResource("5_58myf")
+
+[node name="Audio" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hvr10")
+script = ExtResource("2_2uafy")
+
+[node name="Settings" type="HBoxContainer" parent="Audio"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -38.5
+offset_right = 20.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Labels" type="VBoxContainer" parent="Audio/Settings"]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="Audio/Settings/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
 text = "Music
 "
 
-[node name="SFX" type="HSlider" parent="MarginContainer/VBoxContainer"]
+[node name="SFX" type="Label" parent="Audio/Settings/Labels"]
 layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "SFX
+"
+
+[node name="Slider" type="VBoxContainer" parent="Audio/Settings"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Music" type="HSlider" parent="Audio/Settings/Slider"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/SFX"]
-layout_mode = 0
-offset_left = -28.0
-offset_right = 12.0
-offset_bottom = 23.0
-theme_override_fonts/font = ExtResource("2_k3vv1")
-text = "SFX
-"
-
-[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 40)
+[node name="SFX" type="HSlider" parent="Audio/Settings/Slider"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_k3vv1")
-theme_override_font_sizes/font_size = 35
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Back2" type="Button" parent="Audio"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -46.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_hvr10")
+theme_override_font_sizes/font_size = 30
 text = "Back
 "
+script = ExtResource("5_58myf")
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/Music" to="." method="_on_music_value_changed"]
-[connection signal="changed" from="MarginContainer/VBoxContainer/SFX" to="." method="_on_sfx_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[node name="Controls" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hvr10")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -52.0
+offset_right = 20.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Labels" type="VBoxContainer" parent="Controls/HBoxContainer"]
+layout_mode = 2
+
+[node name="Up" type="Label" parent="Controls/HBoxContainer/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "UP
+"
+
+[node name="Down" type="Label" parent="Controls/HBoxContainer/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "DOWN
+"
+
+[node name="Left" type="Label" parent="Controls/HBoxContainer/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "LEFT
+"
+
+[node name="Right" type="Label" parent="Controls/HBoxContainer/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "RIGHT
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="ActionButton" parent="Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_r22wm")]
+layout_mode = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1_hvr10")
+
+[node name="ActionButton2" parent="Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_r22wm")]
+layout_mode = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1_hvr10")
+action = "down"
+
+[node name="ActionButton3" parent="Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_r22wm")]
+layout_mode = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1_hvr10")
+action = "left"
+
+[node name="ActionButton4" parent="Controls/HBoxContainer/VBoxContainer2" instance=ExtResource("3_r22wm")]
+layout_mode = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1_hvr10")
+action = "right"
+
+[node name="Back" type="Button" parent="Controls"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -46.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_hvr10")
+theme_override_font_sizes/font_size = 30
+text = "Back
+"
+script = ExtResource("5_58myf")
+
+[connection signal="toggled" from="Video/Settings/Checkbox/Fullscreen" to="Video" method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="Video/Settings/Checkbox/Borderless" to="Video" method="_on_borderless_toggled"]
+[connection signal="item_selected" from="Video/Settings/Checkbox/Vsync" to="Video" method="_on_vsync_item_selected"]
+[connection signal="pressed" from="Video/Back2" to="Video/Back2" method="_on_pressed"]
+[connection signal="value_changed" from="Audio/Settings/Slider/Music" to="Audio" method="_on_music_value_changed"]
+[connection signal="value_changed" from="Audio/Settings/Slider/SFX" to="Audio" method="_on_sfx_value_changed"]
+[connection signal="pressed" from="Audio/Back2" to="Audio/Back2" method="_on_pressed"]
+[connection signal="pressed" from="Controls/Back" to="Controls/Back" method="_on_pressed"]

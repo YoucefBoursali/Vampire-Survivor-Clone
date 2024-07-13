@@ -1,13 +1,14 @@
 extends Control
 
-
+@export var click_stream: AudioStream
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 func _ready() -> void:
 	animation_player.play("RESET")
 
 func resume() -> void:
-	get_tree().paused = false
+	get_tree().set_deferred("paused", false)
 	animation_player.play_backwards("blur")
 
 func pause() -> void:
@@ -16,18 +17,19 @@ func pause() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
-	Click.play()
+
 
 func _on_resume_pressed() -> void:
-	Click.play()
+
 	resume()
 func _on_restart_pressed() -> void:
+	
 	get_tree().reload_current_scene()
 	resume()
-	Click.play()
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and !get_tree().paused:
-		pause()
-	elif Input.is_action_just_pressed("pause") and get_tree().paused:
-		resume()
 
+func _unhandled_input(event: InputEvent)-> void:
+	if event.is_action_pressed("pause"):
+		if get_tree().paused:
+			resume()
+		else:
+			pause()

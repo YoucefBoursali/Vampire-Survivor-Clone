@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ufkv2yr6i70t"]
+[gd_scene load_steps=5 format=3 uid="uid://ufkv2yr6i70t"]
 
 [ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_t4ct1"]
 [ext_resource type="FontFile" uid="uid://blb1mcdpplffp" path="res://Assets/Font/tenderness.otf" id="2_ayxx1"]
+[ext_resource type="Texture2D" uid="uid://l55lmcwvfxka" path="res://Assets/layers/parallax-mountain-bg.png" id="2_pl8oh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmilu"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -13,6 +16,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t4ct1")
+
+[node name="Parallax-mountain-bg" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rmilu")
+position = Vector2(-1.50005, -17.9999)
+scale = Vector2(4.55515, 4.575)
+texture = ExtResource("2_pl8oh")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -32,13 +41,16 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("2_ayxx1")
 text = "Play"
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ayxx1")
@@ -46,12 +58,17 @@ text = "Options
 "
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Play")
 theme_override_fonts/font = ExtResource("2_ayxx1")
 text = "Quit
 "
 
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc5ygxu4gaqx"]
-
-[ext_resource type="AudioStream" uid="uid://dmuy221p2nioq" path="res://Assets/Audio/Music/battleThemeA.mp3" id="1_w0leh"]
-
-[node name="Music" type="AudioStreamPlayer2D"]
-stream = ExtResource("1_w0leh")
-autoplay = true
-bus = &"Music"

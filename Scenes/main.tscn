@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://b1lsq1qjr1xjb" path="res://ResourceScripts/Resources/pierce.tres" id="6_5bl5j"]
 [ext_resource type="PackedScene" uid="uid://bd82kl1v03y6y" path="res://Scenes/upgrade.tscn" id="6_6gon6"]
 [ext_resource type="Script" path="res://Scripts/CanvasLayer.gd" id="11_80bw1"]
-[ext_resource type="PackedScene" uid="uid://ce8q03mqxyxv0" path="res://Scenes/pause.tscn" id="12_wtcj5"]
+[ext_resource type="PackedScene" uid="uid://ce8q03mqxyxv0" path="res://Scenes/pause.tscn" id="12_8gwxe"]
 
 [sub_resource type="Curve2D" id="Curve2D_abxpf"]
 _data = {
@@ -88,6 +88,6 @@ show_percentage = false
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
-[node name="Pause" parent="CanvasLayer2" instance=ExtResource("12_wtcj5")]
+[node name="Pause" parent="CanvasLayer2" instance=ExtResource("12_8gwxe")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

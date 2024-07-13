@@ -1,36 +1,97 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce8q03mqxyxv0"]
+[gd_scene load_steps=9 format=3 uid="uid://ce8q03mqxyxv0"]
 
 [ext_resource type="Script" path="res://Scripts/Pause.gd" id="1_5n6lf"]
-[ext_resource type="Shader" path="res://Scripts/pause.gdshader" id="2_vfbk8"]
+[ext_resource type="AudioStream" uid="uid://dj2srla0ymt0s" path="res://Assets/Audio/GUI/click.wav" id="2_6c0wx"]
+[ext_resource type="Shader" path="res://Shaders/pause.gdshader" id="2_q7q6k"]
 [ext_resource type="FontFile" uid="uid://blb1mcdpplffp" path="res://Assets/Font/tenderness.otf" id="2_wllv2"]
-[ext_resource type="PackedScene" uid="uid://bh1vqslnefb53" path="res://Scenes/blur_effect.tscn" id="4_msnnb"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rq2s2"]
-shader = ExtResource("2_vfbk8")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uaii6"]
+shader = ExtResource("2_q7q6k")
 shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_ajgkc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v6a0m"]
+resource_name = "blur"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.882]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qb465"]
+_data = {
+"RESET": SubResource("Animation_ajgkc"),
+"blur": SubResource("Animation_v6a0m")
+}
 
 [node name="Pause" type="Control"]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5n6lf")
+click_stream = ExtResource("2_6c0wx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_rq2s2")
-layout_mode = 0
-offset_left = -573.0
-offset_top = -327.0
-offset_right = 578.0
-offset_bottom = 324.0
+material = SubResource("ShaderMaterial_uaii6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-modulate = Color(1, 1, 1, 0.027451)
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -67,7 +128,10 @@ theme_override_fonts/font = ExtResource("2_wllv2")
 text = "Quit
 "
 
-[node name="AnimationPlayer" parent="." instance=ExtResource("4_msnnb")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qb465")
+}
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

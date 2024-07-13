@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var collect: AudioStreamPlayer2D = $Collect
+
 @export var gem_resource: Gems
 @onready var sprite: Sprite2D = $Sprite2D
 var score: int:
@@ -16,7 +16,7 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 	if body is Player:
 		score += gem_resource.score
 		visible = false
-		collect.play()
+		AudioSfxManager.play("res://Assets/Audio/SoundEffect/collectgem.mp3")
 		$CollisionShape2D.set_deferred("disabled", true)
 		
 
