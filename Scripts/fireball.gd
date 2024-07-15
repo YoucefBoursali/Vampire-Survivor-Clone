@@ -5,8 +5,9 @@ class_name FireBall
 @onready var player : CharacterBody2D = get_tree().get_first_node_in_group("Player")
 var direction: Vector2
 @export var speed := 300.0
-@export var damage: = randi_range(1.0, 8.0)
+@export var damage: = randi_range(10,50)
 @export var max_pierce := 1
+@export var knockback_force: Vector2 = Vector2.ZERO
 var pierces := 0
 func _physics_process(delta: float) -> void:
 	direction = Vector2.RIGHT.rotated(rotation)
@@ -20,6 +21,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent:
 		var attack := Attack.new()
 		attack.attack_damage = damage
+		attack.knockback_force = knockback_force
 		area.damage(attack)
 		pierces += 1
 		if pierces >= max_pierce:

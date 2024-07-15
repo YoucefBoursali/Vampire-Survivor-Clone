@@ -880,9 +880,6 @@ position = Vector2(18, 11)
 [node name="FiringCooldown" type="Timer" parent="Weapon"]
 wait_time = 0.5
 
-[node name="FireEnd" type="Timer" parent="Weapon"]
-wait_time = 6.0
-
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Gameover" type="AudioStreamPlayer2D" parent="Sounds"]

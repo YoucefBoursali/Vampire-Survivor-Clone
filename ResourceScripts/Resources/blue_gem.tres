@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("1_tq8mu")
-score = 10
+score = 5
 texture = ExtResource("2_1vxpt")

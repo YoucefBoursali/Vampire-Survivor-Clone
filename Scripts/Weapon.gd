@@ -7,9 +7,8 @@ var to_attack: bool = true
 var max_bullets := 1
 func _physics_process(delta: float) -> void:
 	for i in max_bullets:
-		if Input.is_action_just_pressed("shoot") and to_attack:
+		if Input.is_action_pressed("shoot") and to_attack:
 			$FiringCooldown.start()
-			$FireEnd.start()
 			if sign(player.aim_position.x) != sign(marker.position.x):
 				marker.position.x *= -1
 			var direction := get_global_mouse_position() - marker.global_position
@@ -21,8 +20,6 @@ func _physics_process(delta: float) -> void:
 
 			for upgrades in player.upgrade:
 				upgrades.apply_upgrade(new_fireball)
-			for tornado in player.upgrade:
-				tornado.apply_upgrade_to_player(player)
 
 func _on_timer_timeout() -> void:
 	to_attack = true

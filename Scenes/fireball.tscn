@@ -90,6 +90,9 @@ _data = {
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_f2qff")
+speed = null
+max_pierce = null
+knockback_force = null
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.97507, 0, 0.191377, 1)

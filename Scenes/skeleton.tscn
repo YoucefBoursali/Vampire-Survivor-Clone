@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6mag0gclpcf"]
+[gd_scene load_steps=20 format=3 uid="uid://b6mag0gclpcf"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton.gd" id="1_xwp4n"]
 [ext_resource type="Texture2D" uid="uid://cjrtc40o6io60" path="res://Assets/Enemies/Skeleton/Death.png" id="2_6ob6q"]
@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://cypi6f4meca5" path="res://Assets/Audio/SoundEffect/enemy_death.ogg" id="7_7wg57"]
 [ext_resource type="PackedScene" uid="uid://bew0mcglnadur" path="res://Scenes/hurtbox.tscn" id="7_645i4"]
 [ext_resource type="AudioStream" uid="uid://cwekbi6wd2tyq" path="res://Assets/Audio/SoundEffect/enemy_hit.ogg" id="8_mqwab"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="10_ilxns"]
+[ext_resource type="Script" path="res://Scenes/Fellow.gd" id="11_74xgc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_45s32"]
 radius = 5.0
@@ -257,7 +259,7 @@ collision_mask = 6
 motion_mode = 1
 platform_floor_layers = 4294967040
 script = ExtResource("1_xwp4n")
-speed = 60.0
+speed = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_6ob6q")
@@ -301,3 +303,13 @@ bus = &"SFX"
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_mqwab")
 bus = &"SFX"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("10_ilxns")
+
+[node name="Fellow" type="Node" parent="StateMachine"]
+script = ExtResource("11_74xgc")
+
+[node name="Knockback" type="Node" parent="StateMachine"]
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

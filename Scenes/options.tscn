@@ -121,6 +121,11 @@ grow_vertical = 2
 [node name="Labels" type="VBoxContainer" parent="Audio/Settings"]
 layout_mode = 2
 
+[node name="Master" type="Label" parent="Audio/Settings/Labels"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_hvr10")
+text = "Master"
+
 [node name="Music" type="Label" parent="Audio/Settings/Labels"]
 layout_mode = 2
 size_flags_vertical = 6
@@ -138,6 +143,14 @@ text = "SFX
 [node name="Slider" type="VBoxContainer" parent="Audio/Settings"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+
+[node name="Master" type="HSlider" parent="Audio/Settings/Slider"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.05
+value = 0.5
 
 [node name="Music" type="HSlider" parent="Audio/Settings/Slider"]
 unique_name_in_owner = true
@@ -270,6 +283,7 @@ script = ExtResource("5_58myf")
 [connection signal="toggled" from="Video/Settings/Checkbox/Borderless" to="Video" method="_on_borderless_toggled"]
 [connection signal="item_selected" from="Video/Settings/Checkbox/Vsync" to="Video" method="_on_vsync_item_selected"]
 [connection signal="pressed" from="Video/Back2" to="Video/Back2" method="_on_pressed"]
+[connection signal="value_changed" from="Audio/Settings/Slider/Master" to="Audio" method="_on_master_value_changed"]
 [connection signal="value_changed" from="Audio/Settings/Slider/Music" to="Audio" method="_on_music_value_changed"]
 [connection signal="value_changed" from="Audio/Settings/Slider/SFX" to="Audio" method="_on_sfx_value_changed"]
 [connection signal="pressed" from="Audio/Back2" to="Audio/Back2" method="_on_pressed"]

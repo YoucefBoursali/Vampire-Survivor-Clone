@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name Skeleton
+
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("Player")
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Sprite2D
@@ -25,3 +26,4 @@ func drop_gem() -> void:
 	var new_gems := gems.instantiate()
 	new_gems.global_position = global_position
 	get_tree().root.add_child(new_gems)
+

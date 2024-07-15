@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://ce8q03mqxyxv0"]
+[gd_scene load_steps=8 format=3 uid="uid://ce8q03mqxyxv0"]
 
 [ext_resource type="Script" path="res://Scripts/Pause.gd" id="1_5n6lf"]
-[ext_resource type="AudioStream" uid="uid://dj2srla0ymt0s" path="res://Assets/Audio/GUI/click.wav" id="2_6c0wx"]
 [ext_resource type="Shader" path="res://Shaders/pause.gdshader" id="2_q7q6k"]
 [ext_resource type="FontFile" uid="uid://blb1mcdpplffp" path="res://Assets/Font/tenderness.otf" id="2_wllv2"]
 
@@ -79,7 +78,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5n6lf")
-click_stream = ExtResource("2_6c0wx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_uaii6")

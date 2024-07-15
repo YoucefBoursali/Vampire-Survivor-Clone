@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://ykiyewlolecy"]
+[gd_scene load_steps=8 format=3 uid="uid://ykiyewlolecy"]
 
 [ext_resource type="Script" path="res://Scripts/gem.gd" id="1_62yfg"]
 [ext_resource type="Texture2D" uid="uid://cirb4rif86ib" path="res://Assets/Textures/Items/Gems/Gem_blue.png" id="1_oswao"]
 [ext_resource type="Resource" uid="uid://cupq55xi610ek" path="res://ResourceScripts/Resources/blue_gem.tres" id="2_q1t2n"]
+[ext_resource type="Resource" uid="uid://cowjnq43fvokt" path="res://ResourceScripts/Resources/green_gem.tres" id="3_7dd1p"]
 [ext_resource type="AudioStream" uid="uid://dmctuggh73fd6" path="res://Assets/Audio/SoundEffect/collectgem.mp3" id="3_86g84"]
+[ext_resource type="Resource" uid="uid://bqga5knj7cjtf" path="res://ResourceScripts/Resources/red_gem.tres" id="4_f1tdq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ymvy"]
 
 [node name="Gem" type="Area2D"]
 script = ExtResource("1_62yfg")
-gem_resource = ExtResource("2_q1t2n")
+array_gems = Array[Resource]([ExtResource("2_q1t2n"), ExtResource("3_7dd1p"), ExtResource("4_f1tdq")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
