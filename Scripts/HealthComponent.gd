@@ -16,16 +16,6 @@ func _ready() -> void:
 		hitbox_component.damaged.connect(on_damaged)
 	
 func on_damaged(attack: Attack) -> void:
-	animation_player.play("hit")
-	if eye:
-		eye.Is_hit = true
-	if skeleton:
-		skeleton.Is_hit = true
-	await animation_player.animation_finished
-	if skeleton:
-		skeleton.Is_hit = false
-	if eye:
-		eye.Is_hit = false
 	health -= attack.attack_damage
 	print(attack.attack_damage)
 	health_changed.emit(health, max_health)

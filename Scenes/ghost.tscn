@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://qn8dwgkeonkw"]
+
+[ext_resource type="Texture2D" uid="uid://e2v1tn836qh3" path="res://Assets/Character/Necromancer_creativekind-Sheet.png" id="1_0wm7p"]
+[ext_resource type="Script" path="res://Scripts/ghost.gd" id="2_ixyj6"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(1, 0.972549, 1, 0.615686)
+show_behind_parent = true
+texture = ExtResource("1_0wm7p")
+hframes = 17
+vframes = 5
+script = ExtResource("2_ixyj6")

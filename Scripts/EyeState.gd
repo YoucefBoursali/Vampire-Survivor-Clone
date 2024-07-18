@@ -1,11 +1,13 @@
+
 extends Node
-class_name State
-signal Transitioned(states: State, new_state_name: String)
+class_name EyeState
+signal Transition(states: EyeState, new_state_name: String)
 
 @onready var player: Player
-@onready var skeleton: Skeleton = get_owner()
+@onready var eye: Eye = get_owner()
+
 func _ready() -> void:
-	skeleton.hurt.connect(on_hurt)
+	eye.hurt.connect(on_hurt)
 func enter() -> void:
 	pass
 
@@ -17,5 +19,7 @@ func state_process(delta: float) -> void:
 
 func state_physics(delta: float) -> void:
 	pass
+
 func on_hurt() -> void:
-	Transitioned.emit(self, "Hurt")
+	Transition.emit(self,"EyeHurt")
+	

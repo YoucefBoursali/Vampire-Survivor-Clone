@@ -86,18 +86,15 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3udyw"]
 
-[node name="Fireball" type="CharacterBody2D"]
+[node name="Fireball" type="CharacterBody2D" groups=["Projectile"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_f2qff")
-speed = null
-max_pierce = null
-knockback_force = null
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.97507, 0, 0.191377, 1)
 sprite_frames = SubResource("SpriteFrames_33k1x")
-frame = 3
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -116,4 +113,5 @@ one_shot = true
 autostart = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

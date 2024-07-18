@@ -1,17 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://d3r21vxtatr77"]
+[gd_scene load_steps=22 format=3 uid="uid://d3r21vxtatr77"]
 
 [ext_resource type="Script" path="res://Scripts/eye.gd" id="1_2wri7"]
 [ext_resource type="Texture2D" uid="uid://d3a8by6j3uft6" path="res://Assets/Enemies/Flying eye/Flight.png" id="1_wyl68"]
 [ext_resource type="Texture2D" uid="uid://buwgahvonqfav" path="res://Assets/Enemies/Flying eye/Take Hit.png" id="2_1rhoq"]
+[ext_resource type="Script" path="res://Scripts/eye_animation.gd" id="2_432ro"]
 [ext_resource type="PackedScene" uid="uid://3tmycroc4sxu" path="res://Scenes/hitbox_component.tscn" id="2_d85v4"]
 [ext_resource type="Texture2D" uid="uid://btjvnvcohulv" path="res://Assets/Enemies/Flying eye/Death.png" id="3_dg1m1"]
 [ext_resource type="PackedScene" uid="uid://dyv4xbrmmcvvf" path="res://Scenes/health_component.tscn" id="3_eqkss"]
 [ext_resource type="PackedScene" uid="uid://bew0mcglnadur" path="res://Scenes/hurtbox.tscn" id="6_37tfe"]
 [ext_resource type="AudioStream" uid="uid://cwekbi6wd2tyq" path="res://Assets/Audio/SoundEffect/enemy_hit.ogg" id="7_nuaao"]
 [ext_resource type="AudioStream" uid="uid://cypi6f4meca5" path="res://Assets/Audio/SoundEffect/enemy_death.ogg" id="8_2kue7"]
+[ext_resource type="Script" path="res://Scripts/EyeStateMachine.gd" id="11_acgx0"]
+[ext_resource type="Script" path="res://Scripts/EyeFellow.gd" id="12_u4nxx"]
+[ext_resource type="Script" path="res://Scripts/EyeHurt.gd" id="13_kyp8y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nxvgg"]
-radius = 8.0
+radius = 11.0
 
 [sub_resource type="Animation" id="Animation_406nr"]
 length = 0.001
@@ -309,14 +313,18 @@ radius = 23.0217
 [sub_resource type="CircleShape2D" id="CircleShape2D_xciff"]
 radius = 9.05539
 
-[node name="Eye" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Eye" type="CharacterBody2D" groups=["Eye"]]
 self_modulate = Color(1, 1, 1, 0)
 motion_mode = 1
 platform_floor_layers = 4294967040
 script = ExtResource("1_2wri7")
 
+[node name="Animations" type="Node" parent="."]
+script = ExtResource("2_432ro")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_dg1m1")
+unique_name_in_owner = true
+texture = ExtResource("2_1rhoq")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -324,6 +332,7 @@ position = Vector2(5, 1)
 shape = SubResource("CircleShape2D_nxvgg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_aqkqi")
 }
@@ -358,3 +367,15 @@ bus = &"SFX"
 [node name="death" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_2kue7")
 bus = &"SFX"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("11_acgx0")
+initial_state = NodePath("EyeFellow")
+
+[node name="EyeFellow" type="Node" parent="StateMachine"]
+script = ExtResource("12_u4nxx")
+
+[node name="EyeHurt" type="Node" parent="StateMachine"]
+script = ExtResource("13_kyp8y")
+
+[connection signal="hurting" from="HitboxComponent" to="." method="_on_hitbox_component_hurting"]

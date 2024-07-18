@@ -836,7 +836,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2x50m"]
-size = Vector2(12, 35)
+size = Vector2(12, 37)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 2
@@ -867,7 +867,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 32.5)
+position = Vector2(0, 31.5)
 shape = SubResource("RectangleShape2D_2x50m")
 
 [node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("player")]
@@ -886,5 +886,9 @@ wait_time = 0.5
 stream = ExtResource("5_nvet0")
 bus = &"Music"
 
+[node name="Ghosting time" type="Timer" parent="."]
+wait_time = 0.15
+
 [connection signal="area_entered" from="Hurtbox" to="Player_Health" method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="Weapon/FiringCooldown" to="Weapon" method="_on_timer_timeout"]
+[connection signal="timeout" from="Ghosting time" to="." method="_on_ghosting_time_timeout"]
